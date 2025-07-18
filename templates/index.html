@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Hero Section -->
+<section id="home" class="section" style="min-height: 100vh; display: flex; align-items: center;">
+    <div class="container">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <!-- Profile picture above name, larger size -->
+            <img src="{{ url_for('static', filename='profile.jpeg') }}" alt="Profile Picture"
+                 style="width: 220px; height: 220px; object-fit: cover; border-radius: 50%; margin-bottom: 1.5rem; border: 6px solid #667eea; box-shadow: 0 8px 32px rgba(102,126,234,0.2);">
+            <h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(45deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                Hi, 
+                I'm Mohan Vamsi Paruchuri
+            </h1>
+            <h2 style="font-size: 2rem; font-weight: 400; margin-bottom: 2rem; color: #a0a0a0;">
+                Data Analyst
+            </h2>
+            <p style="font-size: 1.2rem; margin-bottom: 3rem; color: #cccccc; line-height: 1.8;">
+                Passionate about creating innovative solutions through code.<br>
+                Specializing in machine learning, web development, and data analysis.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#projects" class="btn">View My Work</a>
+                <a href="#contact" class="btn btn-outline">Get In Touch</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section">
+    <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+            <div class="card">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #667eea;">Who I Am</h3>
+                <p style="margin-bottom: 1rem; color: #cccccc;">
+                    I'm a passionate Python developer with expertise in machine learning, data analysis, and web development. 
+                    I love turning complex problems into simple, beautiful solutions.
+                </p>
+                <p style="margin-bottom: 1.5rem; color: #cccccc;">
+                    My journey in programming started with Python, and I've been exploring various domains including 
+                    data science, web scraping, and building interactive applications.
+                </p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <span style="background: rgba(102, 126, 234, 0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; color: #667eea;">Python</span>
+                    <span style="background: rgba(102, 126, 234, 0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; color: #667eea;">Machine Learning</span>
+                    <span style="background: rgba(102, 126, 234, 0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; color: #667eea;">Data Analysis</span>
+                    <span style="background: rgba(102, 126, 234, 0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; color: #667eea;">Web Development</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #667eea;">Skills & Technologies</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;">Programming</h4>
+                        <ul style="list-style: none; color: #cccccc;">
+                            <li>• Python</li>
+                            <li>• JavaScript</li>
+                            <li>• HTML/CSS</li>
+                            <li>• SQL</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;">Libraries & Frameworks</h4>
+                        <ul style="list-style: none; color: #cccccc;">
+                            <li>• Flask/Django</li>
+                            <li>• Pandas/NumPy</li>
+                            <li>• Scikit-learn</li>
+                            <li>• Matplotlib/Seaborn</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="section">
+    <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            {% for project in projects %}
+            <div class="card">
+                <img src="{{ url_for('static', filename=project.image) }}" alt="{{ project.title }}" style="height: 200px; width: 100%; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+                <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: #667eea;">{{ project.title }}</h3>
+                <p style="color: #cccccc; margin-bottom: 1.5rem; line-height: 1.6;">{{ project.description }}</p>
+                <div style="margin-bottom: 1.5rem;">
+                    {% for tech in project.technologies %}
+                    <span style="background: rgba(102, 126, 234, 0.2); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; color: #667eea; margin-right: 0.5rem; margin-bottom: 0.5rem; display: inline-block;">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="{{ project.github_url }}" class="btn" style="flex: 1; text-align: center;">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                    <a href="{{ project.live_url }}" class="btn btn-outline" style="flex: 1; text-align: center;">
+                        <i class="fas fa-external-link-alt"></i> Live
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section">
+    <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 800px; margin: 0 auto;">
+            <div class="card">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #667eea;">Let's Connect</h3>
+                <p style="color: #cccccc; margin-bottom: 2rem;">
+                    I'm always interested in new opportunities and collaborations. 
+                    Feel free to reach out if you'd like to work together or just say hello!
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <i class="fas fa-envelope" style="color: #667eea; font-size: 1.2rem;"></i>
+                        <span style="color: #cccccc;">paruchurimohanvamsi@gmail.com</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <i class="fab fa-github" style="color: #667eea; font-size: 1.2rem;"></i>
+                        <span style="color: #cccccc;">https://github.com/parchurimohanvasmsi</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <i class="fab fa-linkedin" style="color: #667eea; font-size: 1.2rem;"></i>
+                        <span style="color: #cccccc;">https://www.linkedin.com/in/mohan-paruchuri-061957212/</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #667eea;">Send Message</h3>
+                <form id="contactForm" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <input type="text" name="name" placeholder="Your Name" required 
+                           style="padding: 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.05); color: white; font-size: 1rem;">
+                    <input type="email" name="email" placeholder="Your Email" required 
+                           style="padding: 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.05); color: white; font-size: 1rem;">
+                    <textarea name="message" placeholder="Your Message" rows="5" required 
+                              style="padding: 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.05); color: white; font-size: 1rem; resize: vertical;"></textarea>
+                    <button type="submit" class="btn" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Contact form handling
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    
+    fetch('/contact', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Message sent successfully!');
+            this.reset();
+        } else {
+            alert('Error sending message. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error sending message. Please try again.');
+    });
+});
+
+// Mobile menu toggle
+document.querySelector('.mobile-menu').addEventListener('click', function() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+});
+</script>
+{% endblock %} 
